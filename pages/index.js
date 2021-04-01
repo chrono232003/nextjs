@@ -1,54 +1,43 @@
 import Head from 'next/head'
+import Link from 'next/link'
+import Image from 'next/image'
+import React from 'react';
+import HomeItems from '../components/homeItems'
+import Header from '../components/header'
+import Container from '@material-ui/core/Container';
 
-export default function Home() {
+import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+
+export default function Home({ stories, newsOutlets }) {
+
+  const bodytheme = createMuiTheme({
+    typography: {
+      fontFamily: [
+        'Quicksand',
+      'sans-serif',
+      ].join(','),
+   },});
+
   return (
-    <div className="container">
+    // <div className="container">
+    <Container maxWidth="lg">
       <Head>
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
+        <link href="https://fonts.googleapis.com/css2?family=Plaster&family=Quicksand:wght@500&display=swap" rel="stylesheet"></link>
       </Head>
 
       <main>
-        <h1 className="title">
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+      <ThemeProvider theme={bodytheme}>
 
-        <p className="description">
-          Get started by editing <code>pages/index.js</code>
-        </p>
+      <Header newsOutlets={newsOutlets}/>
 
-        <div className="grid">
-          <a href="https://nextjs.org/docs" className="card">
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className="card">
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className="card"
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="card"
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
+      <HomeItems stories={stories} />
+      
+        </ThemeProvider>
       </main>
 
-      <footer>
+      {/* <footer>
         <a
           href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
           target="_blank"
@@ -57,9 +46,11 @@ export default function Home() {
           Powered by{' '}
           <img src="/vercel.svg" alt="Vercel Logo" className="logo" />
         </a>
-      </footer>
+      </footer> */}
+      
+      <footer>CoinSample 2021 All Rights Reserved</footer>
 
-      <style jsx>{`
+      {/* <style jsx>{`
         .container {
           min-height: 100vh;
           padding: 0 0.5rem;
@@ -203,7 +194,24 @@ export default function Home() {
         * {
           box-sizing: border-box;
         }
-      `}</style>
-    </div>
+      `}</style> */}
+    </Container>
   )
+}
+
+
+export async function getStaticProps() {
+
+  const resOutlets = await fetch('http://localhost:3000/api/getDistinctNewsOutlets')
+  const dataOutlets = await resOutlets.json()
+
+  const res = await fetch('http://localhost:3000/api/getAll')
+  const data = await res.json()
+  console.log(data)
+  return {
+      props: {
+        stories: JSON.parse(JSON.stringify(data)),
+        newsOutlets: JSON.parse(JSON.stringify(dataOutlets)),
+      },
+    };
 }
