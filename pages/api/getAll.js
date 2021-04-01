@@ -8,7 +8,7 @@ var url = "mongodb://localhost:27017/";
 MongoClient.connect(url, function(err, db) {
   if (err) throw err;
   var dbo = db.db("mydb");
-  dbo.collection("coin").find({}).sort({ _id: -1 }).limit(16).toArray(function(err, result) {
+  dbo.collection("coin").find({}).sort({ _id: -1 }).limit(50).toArray(function(err, result) {
     if (err) throw err;
     console.log(result);
     db.close();

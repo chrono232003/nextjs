@@ -5,12 +5,23 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 import Grid from '@material-ui/core/Grid';
 import { Link } from '@material-ui/core';
 
+const bodytheme = createMuiTheme({
+  typography: {
+    fontFamily: [
+      'Quicksand',
+      'sans-serif',
+    ].join(','),
+  },
+});
+
 export default function HomeItems({ stories }) {
     return (
+      <>
         <Grid container spacing={1}>
         {stories.map((item) => (
           <Grid item xs={6}>
@@ -48,16 +59,17 @@ export default function HomeItems({ stories }) {
                   </CardContent>
                 </CardActionArea>
                 <CardActions>
-                  <Button size="small" color="primary">
+                  {/* <Button size="small" color="primary">
                     Share
-                  </Button>
+                  </Button> */}
                   <Button size="small" color="primary">
-                    <Link href={`/story/${encodeURIComponent(item.title)}`}>Read More</Link>
+                    <Link href={`/story/${item.id}`}>Read More</Link>
                   </Button>
                 </CardActions>
               </Card>
             </Grid>
           ))}
           </Grid>
+        </>
     )
 }
