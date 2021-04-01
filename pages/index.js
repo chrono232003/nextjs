@@ -1,6 +1,4 @@
 import Head from 'next/head'
-import Link from 'next/link'
-import Image from 'next/image'
 import React from 'react';
 import HomeItems from '../components/homeItems'
 import Header from '../components/header'

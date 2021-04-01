@@ -31,7 +31,7 @@ export default function NewsFeed({ newsOutlets }) {
         >
             {newsOutlets.map((item) => (
                 <MenuItem onClick={handleClose}>
-                    <Link href="/newsoutlet/something">
+                    <Link href={`/newsoutlet/${encodeURIComponent(item.name)}`}>
                     <a>{item.name}</a>
                     </Link>
                 </MenuItem>

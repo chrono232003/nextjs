@@ -20,17 +20,15 @@ const bodytheme = createMuiTheme({
     ].join(','),
  },});
 
-
 export default function Story({ stories, newsOutlets }) {
     return (
       <Container maxWidth="md">
 
-      <Head>
+<Head>
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
         <link href="https://fonts.googleapis.com/css2?family=Plaster&family=Quicksand:wght@500&display=swap" rel="stylesheet"></link>
       </Head>
-
       <Header newsOutlets={newsOutlets}/>
 <Grid container spacing={1}>
         {stories.map((item) => (
@@ -77,8 +75,8 @@ export async function getServerSideProps(context) {
   const dataOutlets = await resOutlets.json()
 
   //title is encoded
-  const title = context.resolvedUrl.replace("/story/", "");
-  let reqUrl = 'http://localhost:3000/api/singleStory?title='+title;
+  const name = context.resolvedUrl.replace("/newsoutlet/", "");
+  let reqUrl = 'http://localhost:3000/api/newsOutletStories?name='+name;
   const res = await fetch(reqUrl)
   const data = await res.json()
   console.log(data)
