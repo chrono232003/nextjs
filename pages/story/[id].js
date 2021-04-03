@@ -37,13 +37,13 @@ export default function Story({ stories, newsOutlets, title }) {
               <CardActionArea>
                 <CardContent>
 
-                  <img src={item.imageurl} />
+                  <img src = {item.imageurl} style={{maxWidth:'400px'}}/>
 
                   <Typography gutterBottom variant="h5" component="h2">
                     {item.title}
                   </Typography>
                   <Typography component="h5">
-                    Published Date: {new Date(item.published_on * 1000).toDateString()}<br />
+                    Published Date: {item.api == "News API" ? item.published_on : new Date(item.published_on * 1000).toDateString()}<br />
                     Source: {item.source}
                   </Typography>
                   <Typography variant="body2" color="textSecondary" component="p">

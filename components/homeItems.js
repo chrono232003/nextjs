@@ -50,7 +50,7 @@ export default function HomeItems({ stories }) {
                       {item.title}
                     </Typography>
                     <Typography component="h5">
-                    Published Date: {new Date(item.published_on * 1000).toDateString()}<br />
+                    Published Date: {item.api == "News API" ? item.published_on : new Date(item.published_on * 1000).toDateString()}<br />
                     Source: {item.source}
                     </Typography>
                     {/* <Typography variant="body2" color="textSecondary" component="p">
