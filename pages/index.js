@@ -50,7 +50,7 @@ export default function Home({ stories, newsOutlets }) {
 }
 
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
 
   const resOutlets = await fetch('http://localhost:3000/api/getDistinctNewsOutlets')
   const dataOutlets = await resOutlets.json()
