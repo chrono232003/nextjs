@@ -143,8 +143,10 @@ function storeInCollection(query) {
 
         dbo.collection("coin").insertMany(query, {ordered: false}).then(function(err, res) {
             if(err) {console.log(err)}
+            db.close();
         }).catch((err) => {
             console.log(err)
+            db.close();
         })
 
 

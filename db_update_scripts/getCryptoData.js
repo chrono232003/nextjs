@@ -1,3 +1,5 @@
+//import AbortController from "abort-controller"
+
 function storeInCollection(query) {
     var MongoClient = require('mongodb').MongoClient;
     var url = "mongodb://127.0.0.1:27017/";
@@ -31,8 +33,10 @@ function storeInCollection(query) {
 
         dbo.collection("coin").insertMany(query, {ordered: false}).then(function(err, res) {
             if(err) {console.log(err)}
+            db.close();
         }).catch((err) => {
             console.log(err)
+            db.close();
         })
 
 
@@ -46,10 +50,13 @@ function storeInCollection(query) {
     });
 }
 
+const AbortController = require("abort-controller")
+let controller = new AbortController();
+setTimeout(() => controller.abort(), 5000);
 
 const fetch = require('node-fetch');
 var url = 'https://min-api.cryptocompare.com/data/v2/news/'
-fetch(url)
+fetch(url, { signal: controller.signal })
     .then(res => res.json())
     .then(data => storeInCollection(data.Data))
 
