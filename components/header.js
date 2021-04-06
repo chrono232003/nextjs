@@ -35,7 +35,7 @@ export default function Header({ newsOutlets, title }) {
     <>
       <Head>
         <title>{title || "Coin Sample"}</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.png" />
         <link href="https://fonts.googleapis.com/css2?family=Plaster&family=Quicksand:wght@500&display=swap" rel="stylesheet"></link>
       </Head>
       <Grid
