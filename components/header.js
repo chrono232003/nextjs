@@ -33,10 +33,32 @@ export default function Header({ newsOutlets, title }) {
 
   return (
     <>
-      <Head>
+       <Head>
         <title>{title || "Coin Sample"}</title>
         <link rel="icon" href="/favicon.png" />
-        <link href="https://fonts.googleapis.com/css2?family=Plaster&family=Quicksand:wght@500&display=swap" rel="stylesheet"></link>
+        <link
+            rel="preload"
+            href="/fonts/Plaster-Regular.ttf"
+            as="font"
+            crossOrigin=""
+          />
+        <link href="/fonts/style.css" rel="stylesheet"/>
+        <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap" rel="stylesheet"></link>
+
+        <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=UA-158068956-1" >
+        </script>
+        <script dangerouslySetInnerHTML={
+            { __html: `
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){window.dataLayer.push(arguments)}
+                gtag("js", new Date());
+                gtag("config", "UA-158068956-1");
+            `}
+        }>
+        </script>
+
       </Head>
       <Grid
         container
